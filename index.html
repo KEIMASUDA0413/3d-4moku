@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>立体階層四目並べ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>立体階層四目並べ</h1>
+
+  <div id="layout">
+
+    <!-- 🔴 ミニ3Dプレビュー -->
+    <div id="preview3D"></div>
+
+    <!-- 🟢 メイン -->
+    <div id="mainArea">
+
+      <!-- 階層ボタン -->
+      <div id="floorButtons">
+        <button class="floorBtn" data-floor="0">1階</button>
+        <button class="floorBtn" data-floor="1">2階</button>
+        <button class="floorBtn" data-floor="2">3階</button>
+        <button class="floorBtn" data-floor="3">4階</button>
+      </div>
+
+      <!-- 状態表示 -->
+      <div id="floorText">1階</div>
+      <div id="turnText">現在のターン: ○</div>
+
+      <!-- 盤面 -->
+      <div id="board"></div>
+
+      <!-- 勝利表示 -->
+      <div id="winTitle"></div>
+      <ul id="winList"></ul>
+
+      <!-- 操作ボタン -->
+      <button id="undoBtn">一手戻る</button>
+      <button id="resetBtn">もう一回</button>
+
+    </div>
+  </div>
+
+  <!-- 🔥 ここが重要（分割JS） -->
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
