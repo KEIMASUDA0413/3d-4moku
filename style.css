@@ -219,3 +219,66 @@ h1 {
 #resetBtn.show {
   display: inline-block;
 }
+
+/* ===== 置ける場所ハイライト ===== */
+.placeable {
+  outline: 2px solid #00e5ff;
+  box-shadow: 0 0 10px #00e5ff;
+  cursor: pointer;
+}
+
+/* ホバー時 */
+.placeable:hover {
+  background: rgba(0, 229, 255, 0.2);
+}
+
+/* 置けない場所 */
+.cell {
+  cursor: default;
+}
+
+/* 光アニメ（強化） */
+@keyframes glow {
+  from { box-shadow: 0 0 5px #00e5ff; }
+  to { box-shadow: 0 0 15px #00e5ff; }
+}
+
+.placeable {
+  animation: glow 1s infinite alternate;
+}
+
+/* ===== 落下アニメ ===== */
+@keyframes drop {
+  0% {
+    transform: translateY(-120px) scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(10px) scale(1.1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.disk.drop {
+  animation: drop 0.25s ease-out;
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(-120px) scale(0.8);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(5px) scale(1.1);
+  }
+  85% {
+    transform: translateY(-3px) scale(0.95);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
