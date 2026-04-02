@@ -1,6 +1,5 @@
 import { state } from "./state.js";
 
-// ===== 置けるか判定 =====
 function canPlace(x, y, z){
   if(z === 0) return true;
   return state.boardData[z - 1][y][x] !== "";
@@ -18,13 +17,13 @@ export function createBoardHTML(placeDisk){
 
       const diskChar = state.boardData[state.currentFloor][i][j];
 
-      // ===== 駒表示 =====
+      // ===== 駒 =====
       if(diskChar !== ""){
         const disk = document.createElement("span");
         disk.classList.add("disk");
         disk.classList.add(diskChar === "○" ? "white" : "black");
 
-        // 🔥 最後の一手だけ落下アニメーション
+        // 落下
         if(
           state.lastMove &&
           state.lastMove.floor === state.currentFloor &&
@@ -37,7 +36,7 @@ export function createBoardHTML(placeDisk){
         cell.appendChild(disk);
       }
 
-      // ===== 置ける場所ハイライト =====
+      // ===== 置ける場所 =====
       if(
         !state.gameOver &&
         state.boardData[state.currentFloor][i][j] === "" &&
@@ -46,25 +45,22 @@ export function createBoardHTML(placeDisk){
         cell.classList.add("placeable");
       }
 
-      // ===== 勝利ハイライト =====
-      state.lastWinCoords.forEach(line=>{
+      // ===== 勝利演出（順番） =====
+      state.lastWinCoords.forEach((line, lineIndex)=>{
         line.forEach(([f,r,c])=>{
           if(f === state.currentFloor && r === i && c === j){
-            cell.classList.add("winHighlight");
+            setTimeout(()=>{
+              cell.classList.add("winHighlight");
+            }, lineIndex * 200);
           }
         });
       });
 
-      // ===== クリック処理 =====
+      // ===== クリック =====
       cell.addEventListener("click", () => {
 
-        // ゲーム終了時
         if(state.gameOver) return;
-
-        // 置けない場所
         if(!canPlace(j, i, state.currentFloor)) return;
-
-        // すでに埋まってる
         if(state.boardData[state.currentFloor][i][j] !== "") return;
 
         placeDisk(i, j);

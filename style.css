@@ -282,3 +282,51 @@ h1 {
     opacity: 1;
   }
 }
+
+/* ===== 置ける場所 ===== */
+.placeable {
+  outline: 2px solid #00e5ff;
+  box-shadow: 0 0 10px #00e5ff;
+  cursor: pointer;
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 5px #00e5ff; }
+  to { box-shadow: 0 0 15px #00e5ff; }
+}
+
+/* ===== 落下 ===== */
+@keyframes drop {
+  0% { transform: translateY(-120px) scale(0.8); opacity: 0; }
+  70% { transform: translateY(5px) scale(1.1); }
+  85% { transform: translateY(-3px) scale(0.95); }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.disk.drop {
+  animation: drop 0.25s ease-out;
+}
+
+/* ===== 勝利ライン ===== */
+.winHighlight {
+  animation: winGlow 0.6s ease-out forwards;
+}
+
+@keyframes winGlow {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0px gold;
+    background: rgba(255,215,0,0);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px gold;
+    background: rgba(255,215,0,0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px gold;
+    background: rgba(255,215,0,0.2);
+  }
+}

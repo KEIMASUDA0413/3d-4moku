@@ -10,7 +10,7 @@ export function placeDisk(row, col, updateAll){
   if(state.currentFloor > 0 &&
      state.boardData[state.currentFloor - 1][row][col] === "") return;
 
-  // Undo用保存
+  // 履歴保存
   state.moveHistory.push({
     floor: state.currentFloor,
     row,
@@ -23,7 +23,7 @@ export function placeDisk(row, col, updateAll){
   // 配置
   state.boardData[state.currentFloor][row][col] = state.turn;
 
-  // 🔥 最後の一手を記録
+  // 最後の一手
   state.lastMove = {
     floor: state.currentFloor,
     row,
@@ -36,18 +36,17 @@ export function placeDisk(row, col, updateAll){
 
   if(wins.length > 0){
     state.gameOver = true;
+
+    // 🔥 複数ライン対応
     state.lastWinCoords = wins;
 
     playWinSound();
 
-    // 勝利後1階へ
     state.currentFloor = 0;
-
     updateAll();
     return;
   }
 
-  // ターン交代
   state.turn = state.turn === "○" ? "●" : "○";
 
   updateAll();
@@ -78,9 +77,7 @@ function checkAllWins3D(){
           let line = [[f,r,c]];
 
           for(let step=1; step<4; step++){
-            const nf = f + df*step;
-            const nr = r + dr*step;
-            const nc = c + dc*step;
+            const nf=f+df*step,nr=r+dr*step,nc=c+dc*step;
 
             if(nf<0||nf>=state.floors||
                nr<0||nr>=state.boardSize||
